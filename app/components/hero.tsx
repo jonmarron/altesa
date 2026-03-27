@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { heroStats } from "@/app/data/hero";
 
 export function HeroSection() {
   return (
@@ -72,15 +71,6 @@ export function HeroSection() {
 
         </div>
 
-        {/* Stats strip */}
-        <div className="mt-20 pt-10 border-t border-border-dark grid grid-cols-2 md:grid-cols-4 gap-8">
-          {heroStats.map((s) => (
-            <div key={s.label}>
-              <p className="font-display text-3xl font-bold text-gold">{s.value}</p>
-              <p className="mt-1 text-sm text-text-on-dark-muted">{s.label}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
