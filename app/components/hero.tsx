@@ -62,7 +62,7 @@ export function HeroSection() {
                 </svg>
               </a>
               <a
-                href="#contacto"
+                href="mailto:grupoaltesa@grupoaltesa.es"
                 className="inline-flex items-center justify-center rounded-full border border-text-on-dark-muted/30 px-8 py-3.5 text-base font-medium text-text-on-dark hover:border-gold/50 hover:text-gold transition-all duration-300"
               >
                 Contactar
