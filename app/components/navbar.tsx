@@ -49,17 +49,6 @@ export function Navbar() {
           ))}
         </ul>
 
-        <a
-          href="tel:+34943020250"
-          className="hidden lg:flex items-center gap-2 rounded-full border border-gold/40 px-5 py-2.5 text-sm font-medium text-gold hover:bg-gold hover:text-anthracite-deep transition-all duration-300 whitespace-nowrap"
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-          </svg>
-          943 020 250
-        </a>
-
         {/* Mobile toggle */}
         <button
           className="lg:hidden p-2 text-text-on-dark"
@@ -93,14 +82,6 @@ export function Navbar() {
                 </a>
               </li>
             ))}
-            <li>
-              <a
-                href="tel:+34943020250"
-                className="inline-flex items-center gap-2 rounded-full border border-gold/40 px-5 py-2.5 text-sm font-medium text-gold"
-              >
-                943 020 250
-              </a>
-            </li>
           </ul>
         </div>
       )}

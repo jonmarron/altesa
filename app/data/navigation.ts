@@ -4,7 +4,6 @@ export const navLinks = [
   { href: "#empresas", label: "Nuestras Empresas" },
   { href: "#libros", label: "Libros" },
   { href: "#compromiso", label: "Compromiso" },
-  { href: "#contacto", label: "Contacto" },
 ];
 
 export const footerNavLinks = [
@@ -13,5 +12,4 @@ export const footerNavLinks = [
   { href: "#empresas", label: "Nuestras Empresas" },
   { href: "#libros", label: "Libros" },
   { href: "#compromiso", label: "Nuestro Compromiso" },
-  { href: "#contacto", label: "Contacto" },
 ];
