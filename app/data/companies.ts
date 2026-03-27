@@ -6,6 +6,8 @@ export type Company = {
   preview: string;
   /** Path to logo file in /public, e.g. "/empresas/altesa.svg" */
   logo?: string;
+  /** External website URL, if any */
+  url?: string;
 };
 
 export const companies: Company[] = [
@@ -13,6 +15,7 @@ export const companies: Company[] = [
     initials: "AO",
     name: "Altesa Óptica y Audiología",
     logo: "/empresas/altesa.svg",
+    url: "http://www.federopticosaltesa.com/",
     tagline: "Óptica y audiología al servicio del cliente",
     preview:
       "La empresa insignia del grupo. Con 10 establecimientos en el País Vasco, Altesa Óptica y Audiología ofrece servicios de óptica y audiología de máxima calidad al cliente final.",
@@ -23,6 +26,7 @@ export const companies: Company[] = [
     initials: "BG",
     name: "BEGIRA",
     logo: "/empresas/begira.png",
+    url: "http://www.begiraoptika.com/",
     tagline: "Soluciones B2B para profesionales de la óptica",
     preview:
       "BEGIRA ofrece servicios especializados para otros profesionales del sector óptico, incluyendo distribución, formación y consultoría adaptada a las necesidades de cada negocio.",
@@ -33,6 +37,7 @@ export const companies: Company[] = [
     initials: "AT",
     name: "ATENEA",
     logo: "/empresas/atenea.png",
+    url: "http://www.soyatenea.com/",
     tagline: "Optometría avanzada y soluciones clínicas",
     preview:
       "ATENEA se especializa en servicios de optometría avanzada y en el desarrollo de soluciones clínicas innovadoras para profesionales y centros de salud visual.",

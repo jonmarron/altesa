@@ -28,7 +28,12 @@ function CompanyCard({ company }: { company: Company }) {
 
       {/* Name + tagline */}
       <h3 className="font-semibold text-base text-text">
-        {company.name}
+        {company.url ? (
+          <a href={company.url} target="_blank" rel="noopener noreferrer"
+            className="hover:text-gold transition-colors">
+            {company.name}
+          </a>
+        ) : company.name}
       </h3>
       <p className="text-xs mt-1 text-gold-dark">
         {company.tagline}
