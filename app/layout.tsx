@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "./components/navbar";
 import { Footer } from "./components/footer";
+import { JsonLd } from "./components/json-ld";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -14,11 +15,49 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
 });
 
+const BASE_URL = "https://jonmarron.github.io/altesa";
+
 export const metadata: Metadata = {
-  title: "Grupo Altesa | Servicios Integrales de Óptica",
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "Grupo Altesa | Óptica, Optometría y Audiología",
+    template: "%s | Grupo Altesa",
+  },
   description:
-    "Grupo Altesa - Especialistas en servicios ópticos integrales en Irún, Gipuzkoa. Más de 30 años de experiencia al servicio de su visión.",
-  keywords: ["óptica", "gafas", "lentes", "Irún", "Gipuzkoa", "Grupo Altesa"],
+    "Grupo Altesa es un grupo empresarial especializado en óptica, optometría y audiología con más de 30 años de experiencia en el País Vasco. Cuatro empresas, un mismo compromiso con la salud visual y auditiva.",
+  keywords: [
+    "óptica", "optometría", "audiología", "audífonos", "gafas", "lentes de contacto",
+    "Irún", "Gipuzkoa", "País Vasco", "Grupo Altesa", "Federópticos", "BEGIRA", "ATENEA",
+  ],
+  authors: [{ name: "Grupo Altesa" }],
+  openGraph: {
+    type: "website",
+    locale: "es_ES",
+    url: BASE_URL,
+    siteName: "Grupo Altesa",
+    title: "Grupo Altesa | Óptica, Optometría y Audiología",
+    description:
+      "Grupo empresarial especializado en óptica, optometría y audiología. Más de 30 años al servicio de profesionales y clientes en el País Vasco.",
+    images: [
+      {
+        url: "/hero-bg.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Grupo Altesa — Óptica, Optometría y Audiología",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Grupo Altesa | Óptica, Optometría y Audiología",
+    description:
+      "Grupo empresarial especializado en óptica, optometría y audiología. Más de 30 años al servicio de profesionales y clientes en el País Vasco.",
+    images: ["/hero-bg.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -32,6 +71,7 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <JsonLd />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
