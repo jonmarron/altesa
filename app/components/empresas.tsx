@@ -27,14 +27,7 @@ function CompanyCard({ company }: { company: Company }) {
       </div>
 
       {/* Name + tagline */}
-      <h3 className="font-semibold text-base text-text">
-        {company.url ? (
-          <a href={company.url} target="_blank" rel="noopener noreferrer"
-            className="hover:text-gold transition-colors">
-            {company.name}
-          </a>
-        ) : company.name}
-      </h3>
+      <h3 className="font-semibold text-base text-text">{company.name}</h3>
       <p className="text-xs mt-1 text-gold-dark">
         {company.tagline}
       </p>
@@ -44,18 +37,34 @@ function CompanyCard({ company }: { company: Company }) {
         {expanded ? company.description : company.preview}
       </p>
 
-      <button
-        onClick={() => setExpanded(!expanded)}
-        className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-gold-dark hover:text-gold transition-colors self-start"
-      >
-        {expanded ? "Leer menos" : "Leer más"}
-        <svg
-          className={`w-3.5 h-3.5 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
-          fill="none" stroke="currentColor" viewBox="0 0 24 24"
+      <div className="mt-4 flex items-center justify-between">
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-gold-dark hover:text-gold transition-colors"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+          {expanded ? "Leer menos" : "Leer más"}
+          <svg
+            className={`w-3.5 h-3.5 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
+            fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        {company.url && (
+          <a
+            href={company.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-7 h-7 flex items-center justify-center rounded-full border border-border text-text-muted hover:border-gold hover:text-gold transition-colors"
+            aria-label={`Visitar ${company.name}`}
+          >
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        )}
+      </div>
     </div>
   );
 }
