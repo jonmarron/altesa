@@ -23,6 +23,17 @@ There are no tests. Use `npm run build` to verify correctness before finishing a
 - **TypeScript 5** — strict mode
 - **Fonts** — Inter (body, `--font-inter`) and Playfair Display (headings, `--font-display`) via `next/font/google`
 
+## Deployment
+
+Deployed to **GitHub Pages** at `https://jonmarron.github.io/altesa/` via `.github/workflows/deploy.yml` on every push to `main`.
+
+**Static export config** (`next.config.ts`):
+- `output: "export"` — generates the `out/` directory
+- `basePath: process.env.NEXT_PUBLIC_BASE_PATH ?? ""` — set to `/altesa` in CI, empty locally
+- `images: { loader: "custom", loaderFile: "./imageLoader.ts" }` — custom loader that prepends `NEXT_PUBLIC_BASE_PATH` to every image src; required because `next/image` with `unoptimized` skips the basePath transform
+
+> Never use `images: { unoptimized: true }` — it breaks image paths on GitHub Pages. Always use the custom loader.
+
 ## Architecture
 
 Single-page marketing site with a handful of static routes:
@@ -33,6 +44,7 @@ app/
   page.tsx                # Homepage — composes section components in order
   globals.css             # Design tokens + Tailwind import
   components/             # All reusable UI
+  data/                   # All hardcoded content (imported by components)
   servicios/page.tsx      # Standalone services detail page
   aviso-legal/page.tsx    # Legal notice (static)
   politica-privacidad/    # Privacy policy (static)
@@ -44,9 +56,15 @@ app/
 3. `empresas.tsx` — `#empresas`
 4. `libros.tsx` — `#libros`
 5. `compromiso.tsx` — `#compromiso`
-6. `contact.tsx` — `#contacto`
 
-> `about.tsx`, `services.tsx`, `stats.tsx`, `team.tsx` are **unused legacy files** — do not add them back to `page.tsx`.
+> `contact.tsx`, `about.tsx`, `services.tsx`, `stats.tsx`, `team.tsx` are **unused legacy files** — do not add them back to `page.tsx`.
+
+**Data files** under `app/data/`:
+- `navigation.ts` — `navLinks` (navbar) and `footerNavLinks` (footer)
+- `companies.ts` — `Company` type + `companies` array; each entry has a `logo?` field
+- `books.ts` — `books` array (with `cover` field) and `authors` array
+- `quienes-somos.tsx` — Eduardo bio strings and `quienesSomosStats`
+- `compromiso.tsx` — vision, mission, and values (JSX icons → `.tsx` extension)
 
 ## Design System
 
@@ -80,12 +98,16 @@ All tokens are CSS variables defined in `globals.css` and registered via `@theme
 - Each `Company` entry in `app/data/companies.ts` has a `logo?` field pointing to these files
 - `CompanyCard` in `empresas.tsx` renders logos via `next/image` in a fixed `h-14` container with `object-contain object-left`; falls back to the initials badge if no logo is set
 
+**Other public assets**:
+- `eduardo.png` — photo of Eduardo Ladrón de Guevara, used in `quienes-somos.tsx`
+- `books/book-1.png`, `books/book-2.png` — book cover images, used in `libros.tsx`
+
 ## Key Patterns
 
-**Client components** — only `navbar.tsx`, `empresas.tsx`, `quienes-somos.tsx`, and `contact.tsx` are client components (`"use client"`). Everything else is a Server Component. Add `"use client"` only when `useState`/`useEffect` is needed.
+**Client components** — `navbar.tsx`, `empresas.tsx`, `quienes-somos.tsx`, and `libros.tsx` are client components (`"use client"`). Everything else is a Server Component. Add `"use client"` only when `useState`/`useEffect` is needed.
 
-**Expand/collapse** — interactive "Leer más / Leer menos" toggles use local `useState` per card. See `empresas.tsx` (`CompanyCard`) and `quienes-somos.tsx` for the pattern.
+**Expand/collapse** — interactive "Leer más / Leer menos" toggles use local `useState` per card. See `empresas.tsx` (`CompanyCard`), `quienes-somos.tsx`, and `libros.tsx` (`AuthorCard`) for the pattern.
 
-**Contact form** — submits via `mailto:` (no backend). See `contact.tsx`.
+**Contact** — the only contact method is email (`grupoaltesa@grupoaltesa.es`), shown in the footer. There is no contact section on the homepage and no phone number anywhere on the site. Other contact details (address, phone, hours) belong only in the legal pages.
 
 **Nav scroll effect** — navbar starts transparent (works over the dark hero) and gains `bg-anthracite-deep/95 backdrop-blur-md` after 20px scroll. Always test new hero backgrounds against this.
