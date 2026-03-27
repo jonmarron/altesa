@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { books, authors } from "@/app/data/books";
 
@@ -61,17 +62,15 @@ export function LibrosSection() {
               key={book.title}
               className="group flex gap-6 rounded-2xl border border-border bg-surface p-8 hover:border-gold/30 hover:shadow-xl hover:shadow-gold/5 transition-all duration-300"
             >
-              {/* Book spine / cover */}
+              {/* Book cover */}
               <div className="shrink-0">
-                <div className="w-20 h-28 rounded-lg bg-anthracite-deep flex flex-col items-center justify-between p-3 relative overflow-hidden">
-                  {/* Spine accent */}
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gold" />
-                  <span className="text-xs font-bold text-gold/60 self-end">{book.number}</span>
-                  <div className="w-full">
-                    <div className="h-px bg-gold/30 mb-1" />
-                    <div className="h-px bg-gold/20" />
-                  </div>
-                </div>
+                <Image
+                  src={book.cover}
+                  alt={book.title}
+                  width={80}
+                  height={112}
+                  className="w-20 h-28 object-cover rounded-lg shadow-md"
+                />
               </div>
 
               {/* Content */}
@@ -93,10 +92,12 @@ export function LibrosSection() {
           <h3 className="text-xs font-semibold uppercase tracking-widest text-gold-dark mb-8">
             Los Autores
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            {authors.map((author) => (
-              <AuthorCard key={author.name} author={author} />
-            ))}
+          <div className="rounded-2xl border border-border bg-surface p-8 md:p-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+              {authors.map((author) => (
+                <AuthorCard key={author.name} author={author} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
