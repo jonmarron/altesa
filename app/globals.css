@@ -1,26 +1,61 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand */
+  --anthracite: #2b2b2b;
+  --anthracite-deep: #1a1a1a;
+  --anthracite-mid: #3d3d3d;
+  --anthracite-light: #5a5a5a;
+  --gold: #e4c224;
+  --gold-light: #f0d24a;
+  --gold-dark: #c4a81a;
+  --gold-muted: #e4c22420;
+
+  /* Surface */
+  --bg: #faf9f6;
+  --bg-warm: #f4f1ea;
+  --bg-dark: var(--anthracite-deep);
+  --surface: #ffffff;
+  --border: #e5e0d5;
+  --border-dark: #3d3d3d;
+
+  /* Text */
+  --text: var(--anthracite);
+  --text-muted: #7a7672;
+  --text-light: #a8a49f;
+  --text-on-dark: #f0ede6;
+  --text-on-dark-muted: #9a9690;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-anthracite: var(--anthracite);
+  --color-anthracite-deep: var(--anthracite-deep);
+  --color-anthracite-mid: var(--anthracite-mid);
+  --color-anthracite-light: var(--anthracite-light);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-gold-muted: var(--gold-muted);
+  --color-bg: var(--bg);
+  --color-bg-warm: var(--bg-warm);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-border-dark: var(--border-dark);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-light: var(--text-light);
+  --color-text-on-dark: var(--text-on-dark);
+  --color-text-on-dark-muted: var(--text-on-dark-muted);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-playfair);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
