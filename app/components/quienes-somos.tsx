@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
-import { eduardoBio, bioPreview, quienesSomosStats as stats, companyValues } from "@/app/data/quienes-somos";
+import { eduardoBio, bioPreview, quienesSomosStats as stats } from "@/app/data/quienes-somos";
 
 export function QuienesSomosSection() {
   const [expanded, setExpanded] = useState(false);
@@ -23,57 +24,49 @@ export function QuienesSomosSection() {
           </p>
         </div>
 
-        {/* Two column: Eduardo card + values */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Eduardo bio card */}
-          <div className="rounded-2xl bg-surface border border-border shadow-sm p-10 md:p-12">
-            <div className="w-12 h-1 bg-gold rounded-full mb-8" />
+        {/* Eduardo bio card */}
+        <div className="rounded-2xl bg-surface border border-border shadow-sm overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {/* Bio */}
+            <div className="p-10 md:p-12 flex flex-col justify-center">
+              <div className="w-12 h-1 bg-gold rounded-full mb-8" />
 
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 rounded-full bg-anthracite-deep flex items-center justify-center shrink-0">
-                <span className="text-xl font-bold text-gold">EL</span>
-              </div>
-              <div>
-                <p className="font-semibold text-text">
+              <div className="mb-6">
+                <p className="font-semibold text-text text-lg">
                   Eduardo Ladrón de Guevara Portugal
                 </p>
                 <p className="text-xs text-gold-dark mt-0.5">
                   Fundador y Director General · Óptico-Optometrista y Audiólogo
                 </p>
               </div>
+
+              <p className="text-text-muted leading-relaxed text-sm">
+                {expanded ? eduardoBio : bioPreview}
+              </p>
+
+              <button
+                onClick={() => setExpanded(!expanded)}
+                className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gold-dark hover:text-gold transition-colors self-start"
+              >
+                {expanded ? "Leer menos" : "Leer más"}
+                <svg
+                  className={`w-4 h-4 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
             </div>
 
-            <p className="text-text-muted leading-relaxed text-sm">
-              {expanded ? eduardoBio : bioPreview}
-            </p>
-
-            <button
-              onClick={() => setExpanded(!expanded)}
-              className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gold-dark hover:text-gold transition-colors"
-            >
-              {expanded ? "Leer menos" : "Leer más"}
-              <svg
-                className={`w-4 h-4 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
-                fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Right: company values */}
-          <div className="space-y-6">
-            {companyValues.map((v) => (
-              <div key={v.title} className="flex items-start gap-4">
-                <div className="w-10 h-10 shrink-0 rounded-lg bg-anthracite-deep text-gold flex items-center justify-center">
-                  {v.icon}
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-text">{v.title}</p>
-                  <p className="text-xs text-text-muted mt-0.5">{v.desc}</p>
-                </div>
-              </div>
-            ))}
+            {/* Photo */}
+            <div className="relative min-h-80 lg:min-h-full">
+              <Image
+                src="/eduardo.png"
+                alt="Eduardo Ladrón de Guevara Portugal"
+                fill
+                className="object-cover object-center"
+              />
+            </div>
           </div>
         </div>
       </div>
