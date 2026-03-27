@@ -1,4 +1,39 @@
-import { books } from "@/app/data/books";
+"use client";
+
+import { useState } from "react";
+import { books, authors } from "@/app/data/books";
+
+function AuthorCard({ author }: { author: (typeof authors)[number] }) {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <div className="flex flex-col h-full">
+      <div className="flex items-center gap-4 mb-5">
+        <div className="w-12 h-12 rounded-full bg-anthracite-deep text-gold flex items-center justify-center font-bold text-xs shrink-0">
+          {author.initials}
+        </div>
+        <p className="font-semibold text-text">{author.name}</p>
+      </div>
+
+      <p className="text-sm text-text-muted leading-relaxed flex-1">
+        {expanded ? author.bio : author.preview}
+      </p>
+
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-gold-dark hover:text-gold transition-colors self-start"
+      >
+        {expanded ? "Leer menos" : "Leer más"}
+        <svg
+          className={`w-3.5 h-3.5 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
+          fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+    </div>
+  );
+}
 
 export function LibrosSection() {
   return (
@@ -51,6 +86,18 @@ export function LibrosSection() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Authors */}
+        <div className="mt-16">
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-gold-dark mb-8">
+            Los Autores
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            {authors.map((author) => (
+              <AuthorCard key={author.name} author={author} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
